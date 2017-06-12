@@ -4,8 +4,11 @@ var express = require('express'),
     multer = require('multer'),
     xlsx = require('xlsx'),
     pdfDocument = require('pdfkit'),
-    path = require('path');
+    path = require('path'),
+    server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 app.use(bodyParser.json());
+
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
         cb(null, './excelstore/')
@@ -43,8 +46,8 @@ app.post('/upload', function (req, res) {
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/index.html");
 });
-app.listen('3000', function () {
-    console.log('Running on 3000...');
+app.listen(server_port, server_ip_address,function () {
+    console.log('Running on '+server_port);
 });
 
 function generatePDF(responseObject, config, input) {
@@ -56,6 +59,6 @@ function generatePDF(responseObject, config, input) {
         .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
         .fill('red', 'even-odd')
         .restore();
-    doc.image('./batman.jpg', 100, 80, {width: 200, height: 100});
+    doc.image('./batman.jpg', 100, 80, { width: 200, height: 100 });
     doc.end();
 }
