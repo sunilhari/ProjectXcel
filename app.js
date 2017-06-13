@@ -8,7 +8,7 @@ var express = require('express'),
     server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
     server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
     LABEL_EN = require('./locale/en'),
-    model = require('./config/model');
+    model = require('./model/model');
 app.use(bodyParser.json());
 
 var storage = multer.diskStorage({ //multers disk storage settings
@@ -94,6 +94,32 @@ function renderPDF(response) {
         .font('gillsanslight').fontSize(9).text(LABEL_EN.manageFees, 340, 335)//labels
         .font('gillsanslight').fontSize(9).text(model.managementFees, 480, 335)//value
         .moveTo(50, 350).lineTo(570, 350).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.avgTransSize, 50, 355)//labels
+        .font('gillsanslight').fontSize(9).text(model.averageTransSize, 210, 355)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.carriedIns, 340, 355)//labels
+        .font('gillsanslight').fontSize(9).text(model.carriedInt, 480, 355)//value
+        .moveTo(50, 370).lineTo(570, 370).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.partLife, 50, 375)//labels
+        .font('gillsanslight').fontSize(9).text(model.partnerShipLife, 210, 375)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.proTeamSize, 340, 375)//labels
+        .font('gillsanslight').fontSize(9).text(model.professionalTeamSize, 480, 375)//value
+        .moveTo(50, 390).lineTo(570, 390).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.offices, 340, 395)//labels
+        .font('gillsanslight').fontSize(9).text(model.offices, 480, 395)//value
+        /*Next Table*/
+        .moveTo(50, 430).undash().lineTo(570, 430).stroke()//underline of the heading
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.partnerPerformance, 50, 433)
+        .moveTo(50, 450).lineTo(570, 450).stroke()
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.lastReportNav, 50, 455)//labels
+        .font('gillsanslight').fontSize(9).text(model.lastReportedNav, 210, 455)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.nav, 340, 455)//labels
+        .font('gillsanslight').fontSize(9).text(model.nav, 480, 455)//value
+        .moveTo(50, 470).lineTo(570, 470).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.commitment, 50, 475)//labels
+        .font('gillsanslight').fontSize(9).text(model.commitment, 210, 475)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.totalIncVal, 340, 475)//labels
+        .font('gillsanslight').fontSize(9).text(model.totalValuesSinceIncep, 480, 475)//value
+        .moveTo(50, 490).lineTo(570, 490).dash(1, { space: 1 }).stroke()//dashed line  of the heading
     /*Loop Ends Here*/
     doc.end();
 

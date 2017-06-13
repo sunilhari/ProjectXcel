@@ -16,6 +16,23 @@ module.exports = (function () {
         manageFees: "Management Fees:",
         carriedIns: "Carried Interest:",
         proTeamSize: "Professional Team Size:",
-        offices: "Offices:"
+        offices: "Offices:",
+        partnerPerformance:"Partnership Performance (in EUR million)",
+        lastReportNav:"Last Reported NAV:",
+        nav:"NAV:",
+        commitment:"Commitment:",
+        totalIncVal:"Total Value since inception:",
+        drawDown:"Drawdown",
+        tvpi:"TVPI:",
+        called:"% Called:",
+        irrSinceInception:"IRR since inception:",
+        distributions:"Distributions:",
+        capitalWeightedInv:"Capital Weighted Investment Age (in Years):",
+        topFivePort:"Top 5 Portfolio Companies",
+        companyName:"Company Name",
+        description:"Description",
+        status:"Status",
+        industry:"Industry",
+        geography:"Geography"
     }
 })();
