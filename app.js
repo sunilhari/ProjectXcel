@@ -71,12 +71,29 @@ function renderPDF(response) {
         .moveTo(50, 130).lineTo(570, 130).stroke()//underline of the heading
         .font('gillsansbold').fontSize(10).text(LABEL_EN.partnerShipName, 60, 140)
         .moveTo(50, 160).lineTo(570, 160).stroke()//underline of the heading
-
-    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.gpStrategy, 55, 165)//table heading column 1
-        .font('gillsansbold').fontSize(10).text(LABEL_EN.investmentRationale, 230, 165)//table heading column2
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.gpStrategy, 55, 165)//table heading column 1
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.investmentRationale, 210, 165)//table heading column2
         .moveTo(50, 180).lineTo(570, 180).dash(1, { space: 1 }).stroke()//dashed line  of the heading
         .font('gillsanslight').fontSize(9).text(model.partnerShipName, 55, 190)//table heading
-        .font('gillsanslight').fontSize(9).text(model.investRation, 230, 190, { align: 'justify',wordSpacing :0,lineGap:1 });
+        .font('gillsanslight').fontSize(9).text(model.investRation, 210, 190, { align: 'justify', wordSpacing: 0, lineGap: 1,width:295 })
+        .moveTo(50, 270).undash().lineTo(570, 270).stroke()//underline of the heading
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.summaryOfPartTerms, 50, 273)
+        .moveTo(50, 290).lineTo(570, 290).stroke()
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.fundSize, 50, 295)//labels
+        .font('gillsanslight').fontSize(9).text(model.fundSize, 210, 295)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.invPeriod, 340, 295)//labels
+        .font('gillsanslight').fontSize(9).text(model.investmentPeriod, 480, 295)//value
+        .moveTo(50, 310).lineTo(570, 310).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.indFocus, 50, 315)//labels
+        .font('gillsanslight').fontSize(9).text(model.industryFocus, 210, 315)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.hurdRate, 340, 315)//labels
+        .font('gillsanslight').fontSize(9).text(model.hurdleRate, 480, 315)//value
+        .moveTo(50, 330).lineTo(570, 330).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.geoFocus, 50, 335)//labels
+        .font('gillsanslight').fontSize(9).text(model.geographicFocus, 210, 335)//value
+        .font('gillsanslight').fontSize(9).text(LABEL_EN.manageFees, 340, 335)//labels
+        .font('gillsanslight').fontSize(9).text(model.managementFees, 480, 335)//value
+        .moveTo(50, 350).lineTo(570, 350).dash(1, { space: 1 }).stroke()//dashed line  of the heading
     /*Loop Ends Here*/
     doc.end();
 
