@@ -7,7 +7,8 @@ var express = require('express'),
     path = require('path'),
     server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
     server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-    LABEL_EN = require('./locale/en');
+    LABEL_EN = require('./locale/en'),
+    model = require('./config/model');
 app.use(bodyParser.json());
 
 var storage = multer.diskStorage({ //multers disk storage settings
@@ -65,14 +66,17 @@ function renderPDF(response) {
     doc.registerFont('gillsansbold', './fonts/gillsansbold.ttf');
     doc.registerFont('gillsanslight', './fonts/gillsanslight.ttf')
     /*Loop should start here*/
-    doc.rect(30, 1, 100, 70).fillAndStroke('black');
-    doc.font('gillsanslight').fontSize(18).text(LABEL_EN.mainHeading, 50, 100);
-    doc.moveTo(50, 130).lineTo(570, 130).stroke();//underline of the heading
-    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.partnerShipName, 60, 140);
-    doc.moveTo(50, 160).lineTo(570, 160).stroke();//underline of the heading
-    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.gpStrategy, 55, 165);
-    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.investmentRationale, 230, 165);
+    doc.rect(30, 1, 100, 70).fillAndStroke('black')
+        .font('gillsanslight').fontSize(18).text(LABEL_EN.mainHeading, 50, 100)
+        .moveTo(50, 130).lineTo(570, 130).stroke()//underline of the heading
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.partnerShipName, 60, 140)
+        .moveTo(50, 160).lineTo(570, 160).stroke()//underline of the heading
 
+    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.gpStrategy, 55, 165)//table heading column 1
+        .font('gillsansbold').fontSize(10).text(LABEL_EN.investmentRationale, 230, 165)//table heading column2
+        .moveTo(50, 180).lineTo(570, 180).dash(1, { space: 1 }).stroke()//dashed line  of the heading
+        .font('gillsanslight').fontSize(9).text(model.partnerShipName, 55, 190)//table heading
+        .font('gillsanslight').fontSize(9).text(model.investRation, 230, 190, { align: 'justify',wordSpacing :0,lineGap:1 });
     /*Loop Ends Here*/
     doc.end();
 
