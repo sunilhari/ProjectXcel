@@ -6,7 +6,8 @@ var express = require('express'),
     pdfDocument = require('pdfkit'),
     path = require('path'),
     server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+    LABEL_EN = require('./locale/en');
 app.use(bodyParser.json());
 
 var storage = multer.diskStorage({ //multers disk storage settings
@@ -58,19 +59,19 @@ app.listen(server_port, server_ip_address, function () {
 function renderPDF(response) {
     var doc = new pdfDocument({
         layout: "portrait",
-        size:"LEGAL"
+        size: "LEGAL"
     });
     doc.pipe(response);//Output is to response
     doc.registerFont('gillsansbold', './fonts/gillsansbold.ttf');
     doc.registerFont('gillsanslight', './fonts/gillsanslight.ttf')
     /*Loop should start here*/
     doc.rect(30, 1, 100, 70).fillAndStroke('black');
-    doc.font('gillsanslight').fontSize(18).text('Review of Portfolio Funds.', 50, 100);
+    doc.font('gillsanslight').fontSize(18).text(LABEL_EN.mainHeading, 50, 100);
     doc.moveTo(50, 130).lineTo(570, 130).stroke();//underline of the heading
-    doc.font('gillsansbold').fontSize(10).text('PartnerShip Name: ABC', 60, 140);
+    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.partnerShipName, 60, 140);
     doc.moveTo(50, 160).lineTo(570, 160).stroke();//underline of the heading
-    doc.font('gillsansbold').fontSize(10).text('GP Strategy', 55, 165);
-    doc.font('gillsansbold').fontSize(10).text('Investment Rationale', 230, 165);
+    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.gpStrategy, 55, 165);
+    doc.font('gillsansbold').fontSize(10).text(LABEL_EN.investmentRationale, 230, 165);
 
     /*Loop Ends Here*/
     doc.end();
